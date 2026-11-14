@@ -1,0 +1,66 @@
+# ─── Secrets ────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.env
+firebase-credentials.json
+*service-account*.json
+*-adminsdk-*.json
+google-services.json
+GoogleService-Info.plist
+mobile-app/lib/firebase_options.dart
+mobile-app/firebase.json
+key.properties
+*.jks
+*.keystore
+
+# ─── Python ─────────────────────────────────────────────────
+venv/
+.venv/
+env/
+food_ai_env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ─── Models & datasets (distributed via GitHub Releases / Kaggle) ──
+# Large model files. The small nutrition model (~6.5 MB) is committed.
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.pkl
+mobile-app/assets/food_model.tflite
+datasets/
+images/
+data/
+egyptian_food_dataset/
+*.zip
+
+# ─── Flutter / Dart ─────────────────────────────────────────
+mobile-app/.dart_tool/
+mobile-app/.flutter-plugins
+mobile-app/.flutter-plugins-dependencies
+mobile-app/.pub-cache/
+mobile-app/.pub/
+mobile-app/build/
+mobile-app/**/build/
+mobile-app/android/.gradle/
+mobile-app/android/local.properties
+mobile-app/android/app/debug/
+mobile-app/android/app/profile/
+mobile-app/android/app/release/
+mobile-app/ios/Flutter/.last_build_id
+mobile-app/ios/Pods/
+*.iml
+.idea/
+
+# ─── OS / editor ────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+~$*
+.vscode/
+.claude/
