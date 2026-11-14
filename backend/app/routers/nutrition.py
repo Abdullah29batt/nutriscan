@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.core.security import get_current_user
 from app.models.nutrition import NutritionRequest, NutritionResponse, NutrientInfo
-from app.services import nutritionix_service
+from app.services import gemini_nutrition_service
 
 router = APIRouter(prefix="/nutrition", tags=["nutrition"])
 
@@ -19,7 +19,7 @@ async def lookup_nutrition(
     Fetches nutrition facts from Gemini AI for the given food query.
     Requires a valid Firebase ID token in the Authorization header.
     """
-    raw = await nutritionix_service.get_nutrition(body.query)
+    raw = await gemini_nutrition_service.get_nutrition(body.query)
 
     if "error" in raw:
         raise HTTPException(

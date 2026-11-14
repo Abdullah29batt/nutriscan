@@ -3,16 +3,18 @@ import json
 import logging
 import re
 
-import google.generativeai as genai
+from google import genai
 from PIL import Image
 
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-genai.configure(api_key=settings.gemini_api_key)
+_client = genai.Client(api_key=settings.gemini_api_key)
 
-_model = genai.GenerativeModel('gemini-2.5-flash-lite')
+
+def _generate(contents):
+    return _client.models.generate_content(model=settings.gemini_model, contents=contents)
 
 
 def predict(image_bytes: bytes) -> list[dict]:
@@ -26,7 +28,7 @@ def predict(image_bytes: bytes) -> list[dict]:
     try:
         img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
 
-        response = _model.generate_content([
+        response = _generate([
             "Identify the food in this image. "
             "Return ONLY a JSON array with exactly 3 items in this format: "
             '[{"label": "pizza", "display_name": "Pizza", "confidence": 0.95}]. '
@@ -63,7 +65,7 @@ def get_nutrition(food_label: str) -> dict:
     Falls back to zeros if the call fails.
     """
     try:
-        response = _model.generate_content(
+        response = _generate(
             f"Give estimated nutrition facts per 100g for: {food_label}. "
             "Return ONLY a JSON object with these exact numeric keys (no units, no text): "
             '{"calories": 0, "protein": 0, "carbs": 0, "fat": 0, "fiber": 0}.'

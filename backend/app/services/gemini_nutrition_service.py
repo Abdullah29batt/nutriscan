@@ -36,7 +36,7 @@ async def get_nutrition_from_gemini(food_name: str, portion_grams: float = 100) 
 
     try:
         response = await _client.aio.models.generate_content(
-            model="gemini-1.5-flash",
+            model=settings.gemini_model,
             contents=prompt,
         )
         text = response.text.strip()

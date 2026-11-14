@@ -5,28 +5,21 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        extra="ignore"
+        extra="ignore",
     )
 
     # App
-    app_name: str = "Food AI API"
+    app_name: str = "NutriScan API"
     debug: bool = False
 
-    # Firebase
+    # Firebase Admin SDK (used to verify Firebase ID tokens and access Firestore).
+    # Either point to a service-account file, or set FIREBASE_CREDENTIALS_JSON
+    # to the file's JSON content (handy on Render/Railway).
     firebase_credentials_path: str = "firebase-credentials.json"
 
-    # Gemini AI (replaces Nutritionix)
+    # Gemini — the API key lives ONLY on the server, never in the mobile app.
     gemini_api_key: str
-
-    # Security
-    secret_key: str = "graduation2026foodrecognitionapp"
-    algorithm: str = "HS256"
-    access_token_expire_minutes: int = 30
-
-    # Model
-    model_path: str = "../model.keras"
-    model_image_size: int = 224
-    model_top_k: int = 3
+    gemini_model: str = "gemini-2.5-flash-lite"
 
 
 settings = Settings()
